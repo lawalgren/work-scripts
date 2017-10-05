@@ -1,0 +1,162 @@
+DEFAULT_DELAY 100
+REM SCRIPT FOR WINDOWS 10 FLASH PLAYER 26 JAVA 8 UPDATE 131
+REM Update Windows
+DELAY 3000
+CTRL ESC
+DELAY 1000
+STRING settings
+ENTER
+DELAY 2000
+TAB
+DOWN
+DOWN
+ENTER
+DELAY 1000
+TAB
+TAB
+ENTER
+DELAY 500
+ALT F4
+DELAY 500
+REM Defragment
+CTRL ESCAPE
+DELAY 1000
+STRING CMD
+DELAY 300
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+ENTER
+DELAY 200
+STRING defrag %systemdrive%
+ENTER
+DELAY 200
+REM Schedule Check Disk
+CTRL ESCAPE
+DELAY 1000
+STRING CMD
+DELAY 300
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+ENTER
+DELAY 200
+STRING echo y | chkdsk %systemdrive% /f /r
+ENTER
+DELAY 200
+REM Download and run ccleaner
+CTRL ESC
+DELAY 200
+STRING Powershell
+CTRL-SHIFT ENTER
+DELAY 2500
+TAB
+TAB
+ENTER
+DELAY 2500
+STRING Invoke-WebRequest -Uri 'http://download.piriform.com/ccsetup535.exe' -outfile "$ENV:TEMP\ccsetup.exe";
+ENTER
+DELAY 10000
+REM Wait a while
+STRING cd $ENV:TEMP
+ENTER
+DELAY 2000
+STRING cmd
+ENTER
+DELAY 1000
+STRING ccsetup.exe /S
+ENTER
+DELAY 10000
+STRING cd %PROGRAMW6432%\CCleaner
+ENTER
+DELAY 400
+STRING CCleaner.exe /AUTO
+ENTER
+DELAY 10000
+REM Download and install Java
+STRING powershell
+ENTER
+DELAY 1500
+STRING Invoke-WebRequest -Uri 'http://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jre-8u144-windows-i586.exe?GroupName=JSC&FilePath=/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jre-8u144-windows-i586.exe&BHost=javadl.sun.com&File=jre-8u144-windows-i586.exe&AuthParam=1506794702_5e23f6310442c4ef6fd56b37b415d328&ext=.exe' -outfile "$ENV:TEMP\java.exe";
+ENTER
+DELAY 10000
+REPEAT 2
+REM Wait for it to download
+STRING cd $ENV:TEMP
+ENTER
+DELAY 200
+STRING cmd
+ENTER
+DELAY 3500
+STRING java.exe INSTALL_SILENT=1 REMOVEOUTOFDATEJRES=1
+ENTER
+DELAY 5000
+REM Update Adobe Software
+STRING powershell
+ENTER
+DELAY 1500
+STRING Invoke-WebRequest -Uri 'https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player.exe' -outfile "$ENV:TEMP\install_flash_player.exe";
+ENTER
+DELAY 10000
+STRING Invoke-WebRequest -Uri 'https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ax.exe' -outfile "$ENV:TEMP\install_flash_player_ax.exe";
+ENTER
+DELAY 10000
+STRING Invoke-WebRequest -Uri 'https://admdownload.adobe.com/bin/live/readerdc_en_xa_cra_install.exe' -outfile "$ENV:TEMP\readerdc_en_xa_cra_install.exe";
+ENTER
+DELAY 10000
+REPEAT 2
+REM Wait to download, then
+STRING cmd
+ENTER
+DELAY 400
+STRING start "Silent Install Flash Player NPAPI" /wait install_flash_player.exe -install
+ENTER
+DELAY 4000
+STRING start "Silent Install Flash Player ActiveX" /wait install_flash_player_ax.exe -install
+ENTER
+DELAY 4000
+STRING readerdc_en_xa_cra_install.exe /sALL /rs
+ENTER
+DELAY 10000
+REM Clean up a little bit
+WINDOWS S
+DELAY 1000
+STRING CMD
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+ENTER
+DELAY 2000
+STRING cd %PROGRAMW6432%\CCleaner
+ENTER
+DELAY 400
+STRING uninst.exe /S
+ENTER
+DELAY 4000
+STRING cd %temp%
+ENTER
+DELAY 500
+STRING del * /S /Q
+ENTER
+DELAY 5000
+REM Notify that everything has started
+WINDOWS R
+DELAY 1000
+STRING Notepad
+ENTER
+DELAY 3000
+WINDOWS UP
+DELAY 1000
+STRING Maintenance has been started on this machine. You may now unplug the Rubber Ducky.
+ENTER
+DELAY 200
+STRING A check disk will be run on the main volume on restart.
+ENTER
+DELAY 200
+STRING This script should run on any Windows 10 computer. 
+ENTER
+DELAY 200
+STRING It installs Flash Player 26, Java 8 Update 144, and Adobe Reader DC.

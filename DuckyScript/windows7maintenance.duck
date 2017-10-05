@@ -1,0 +1,171 @@
+DEFAULT_DELAY 100
+REM SCRIPT FOR WINDOWS 7 FLASH PLAYER 26 JAVA 8 UPDATE 131
+REM Update Windows
+DELAY 3000
+CTRL ESC
+DELAY 1000
+STRING CMD
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+ENTER
+DELAY 1000
+STRING wuauclt /ShowWUAutoScan
+ENTER
+DELAY 7000
+REM Defragment
+CTRL ESCAPE
+DELAY 1000
+STRING CMD
+DELAY 300
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+ENTER
+DELAY 2000
+STRING defrag %systemdrive%
+ENTER
+DELAY 2000
+REM Schedule Check Disk
+CTRL ESCAPE
+DELAY 1000
+STRING CMD
+DELAY 300
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+ENTER
+DELAY 1000
+STRING echo y | chkdsk %systemdrive% /f /r
+ENTER
+DELAY 2000
+REM Download and run ccleaner
+CTRL ESC
+DELAY 200
+STRING Powershell
+DELAY 1000
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+ENTER
+DELAY 1500
+STRING (New-Object System.Net.WebClient).DownloadFile('http://download.piriform.com/ccsetup532.exe', "$ENV:TEMP\ccsetup.exe");
+ENTER
+DELAY 10000
+DELAY 10000
+REM Wait a while
+STRING cd $ENV:TEMP
+ENTER
+DELAY 200
+STRING cmd
+ENTER
+DELAY 1000
+STRING ccsetup.exe /S
+ENTER
+DELAY 10000
+STRING cd %PROGRAMW6432%\CCleaner
+ENTER
+DELAY 400
+STRING CCleaner.exe /AUTO
+ENTER
+DELAY 10000
+REM Download and install Java
+STRING powershell
+ENTER
+DELAY 1500
+STRING (New-Object System.Net.WebClient).DownloadFile('http://sdlc-esd.oracle.com/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jre-8u144-windows-i586.exe?GroupName=JSC&FilePath=/ESD6/JSCDL/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jre-8u144-windows-i586.exe&BHost=javadl.sun.com&File=jre-8u144-windows-i586.exe&AuthParam=1506794702_5e23f6310442c4ef6fd56b37b415d328&ext=.exe', "$ENV:TEMP\java.exe");
+ENTER
+DELAY 10000
+REPEAT 11
+REM Wait for it to download
+STRING cd $ENV:TEMP
+ENTER
+DELAY 200
+STRING cmd
+ENTER
+DELAY 1500
+STRING java.exe INSTALL_SILENT=1 REMOVEOUTOFDATEJRES=1
+ENTER
+DELAY 5000
+REM Update Adobe Software
+STRING powershell
+ENTER
+DELAY 1500
+STRING (New-Object System.Net.WebClient).DownloadFile('https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player.exe', "$ENV:TEMP\install_flash_player.exe");
+ENTER
+DELAY 10000
+REPEAT 3
+STRING (New-Object System.Net.WebClient).DownloadFile('https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ax.exe', "$ENV:TEMP\install_flash_player_ax.exe");
+ENTER
+DELAY 10000
+REPEAT 3
+STRING (New-Object System.Net.WebClient).DownloadFile('https://admdownload.adobe.com/bin/live/readerdc_en_xa_cra_install.exe', "$ENV:TEMP\readerdc_en_xa_cra_install.exe");
+ENTER
+DELAY 10000
+REPEAT 15
+REM Wait to download, then
+STRING cmd
+ENTER
+DELAY 400
+STRING start "Silent Install Flash Player NPAPI" /wait install_flash_player.exe -install
+ENTER
+DELAY 4000
+STRING start "Silent Install Flash Player ActiveX" /wait install_flash_player_ax.exe -install
+ENTER
+DELAY 4000
+STRING AcroRdrDC1700920044_en_US.exe /sALL /rs
+ENTER
+DELAY 10000
+REM Clean up a little bit
+CTRL ESC
+DELAY 1000
+STRING CMD
+CTRL-SHIFT ENTER
+DELAY 1000
+TAB
+TAB
+TAB
+ENTER
+DELAY 2000
+STRING cd %PROGRAMW6432%\CCleaner
+ENTER
+DELAY 400
+STRING uninst.exe /S
+ENTER
+DELAY 4000
+STRING cd %temp%
+ENTER
+DELAY 500
+STRING del * /S /Q
+ENTER
+DELAY 5000
+REM Notify that everything has started
+WINDOWS R
+DELAY 1000
+STRING Notepad
+ENTER
+DELAY 3000
+WINDOWS UP
+DELAY 1000
+STRING Maintenance has been started on this machine. You may now unplug the Rubber Ducky.
+ENTER
+DELAY 200
+STRING A check disk will be run on the main volume on restart. 
+ENTER
+DELAY 200
+STRING Windows is most likely done checking for updates.
+ENTER
+DELAY 200
+STRING Navigate to the Windows Update client and select which ones you would like to apply.
+ENTER
+DELAY 200
+ENTER
+STRING Flash Player 26, Java 8 Update 131, and Adobe Reader DC have been installed on this system also.
