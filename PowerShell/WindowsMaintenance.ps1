@@ -10,13 +10,13 @@ $adobe = "yes"    : download and install Adobe Flash Player and Reader
 $clrtemp = "yes"  : manually delete contents of %tmp% folder
 #>
 
-$updates = "no"
-$chkdsk = "no"
-$ccleaner = "no"
-$java = "no"
+$updates = "yes"
+$chkdsk = "yes"
+$ccleaner = "yes"
+$java = "yes"
 $adobe = "yes"
-$clrtemp = "no"
-$defrag = "no"
+$clrtemp = "yes"
+$defrag = "yes"
 
 <#
 If the links for the latest versions of the software get old,
@@ -57,10 +57,10 @@ if($updates -eq "yes") {
   }
 }
 
-#defragment main disk
-if($defrag -eq "yes") {
-  echo "Defragmenting main volume"
-  cmd.exe /c "defrag %systemdrive%"
+#chkdsk main disk on restart
+if($chkdsk -eq "yes") {
+  echo "Will perform a checkdisk on next restart"
+  cmd.exe /c "echo y | chkdsk %systemdrive% /f /r"
 }
 
 #install and run CCleaner
@@ -114,10 +114,10 @@ cd $ENV:TEMP
 cmd.exe /c "del * /S /Q"
 }
 
-#chkdsk main disk on restart
-if($chkdsk -eq "yes") {
-  echo "Will perform a checkdisk on next restart"
-  cmd.exe /c "echo y | chkdsk %systemdrive% /f /r"
+#defragment main disk
+if($defrag -eq "yes") {
+  echo "Defragmenting main volume"
+  cmd.exe /c "defrag %systemdrive%"
 }
 
 echo "Done with script."
