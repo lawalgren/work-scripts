@@ -29,7 +29,7 @@ $ReaderLink : Adobe Reader
 #>
 
 $CCLink = "http://download.piriform.com/ccsetup535.exe"
-$javaLink = "http://javadl.oracle.com/webapps/download/AutoDL?BundleId=225355_090f390dda5b47b9b721c7dfaa008135"
+$javaLink = "http://javadl.oracle.com/webapps/download/AutoDL?BundleId=227552_e758a0de34e24606bca991d704f6dcbf"
 $FPNPAPILink = "https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player.exe"
 $FPAXLink = "https://fpdownload.macromedia.com/pub/flashplayer/latest/help/install_flash_player_ax.exe"
 $ReaderLink = "http://ardownload.adobe.com/pub/adobe/reader/win/AcrobatDC/1701220093/AcroRdrDC1701220093_en_US.exe"
